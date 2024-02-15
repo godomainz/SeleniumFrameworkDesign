@@ -11,9 +11,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import com.github.dockerjava.api.model.Driver;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StandAloneTest {

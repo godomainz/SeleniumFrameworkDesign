@@ -1,12 +1,15 @@
 package akila.SeleniumFrameworkDesign;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pageobjects.LandingPage;
+import pageobjects.ProductCatalog;
 
 public class SubmitOrderTest {
 	public static void main(String args[]) {
@@ -24,6 +27,9 @@ public class SubmitOrderTest {
 		landingPage.goTo();
 		
 		landingPage.loginApplication(username, password);
+		
+		ProductCatalog productCatalogPage = new ProductCatalog(driver);
+		List<WebElement> products = productCatalogPage.getProducts();
 		
 		
 		driver.quit();

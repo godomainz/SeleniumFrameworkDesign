@@ -29,8 +29,6 @@ public class StandAloneTest {
 		
 		driver.get(url);
 		
-		LandingPage landingPage = new LandingPage(driver);
-		
 		driver.findElement(By.id("userEmail")).sendKeys(username);
 		driver.findElement(By.id("userPassword")).sendKeys(password);
 		driver.findElement(By.id("login")).click();

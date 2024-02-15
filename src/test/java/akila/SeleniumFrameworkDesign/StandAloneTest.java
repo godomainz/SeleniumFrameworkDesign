@@ -1,15 +1,17 @@
 package akila.SeleniumFrameworkDesign;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StandAloneTest {
-	public static void main() {
+	public static void main(String args[]) {
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -23,7 +25,10 @@ public class StandAloneTest {
 		driver.findElement(By.id("userPassword")).sendKeys(password);
 		driver.findElement(By.id("login")).click();
 		
-		List products = driver.findElements(By.cssSelector(".mb-3"));
+		List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
+		WebElement prod = products.stream().filter(product->product.findElement(By.cssSelector(".card .card-body h5")).getText().equals("ZARA COAT 3")).findFirst().orElse(null);
+		prod.findElement(By.cssSelector(".card .card-body button:last-of-type")).click();
+		
 		
 	}
 

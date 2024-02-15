@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import pageobjects.LandingPage;
 
 public class StandAloneTest {
 	public static void main(String args[]) {
@@ -27,6 +28,9 @@ public class StandAloneTest {
 		String countryName = "india";
 		
 		driver.get(url);
+		
+		LandingPage landingPage = new LandingPage(driver);
+		
 		driver.findElement(By.id("userEmail")).sendKeys(username);
 		driver.findElement(By.id("userPassword")).sendKeys(password);
 		driver.findElement(By.id("login")).click();

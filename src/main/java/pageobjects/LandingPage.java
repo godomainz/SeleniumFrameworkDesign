@@ -36,4 +36,14 @@ public class LandingPage {
 		this.userPassword = userPassword;
 	}
 	
+	public void loginApplication(String username, String password) {
+		this.userEmail.sendKeys(username);
+		this.userPassword.sendKeys(password);
+		this.login.click();
+	}
+	
+	public void goTo() {
+		this.driver.get("https://rahulshettyacademy.com/client/");
+	}
+	
 }

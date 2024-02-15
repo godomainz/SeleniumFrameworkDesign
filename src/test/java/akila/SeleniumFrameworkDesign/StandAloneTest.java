@@ -7,21 +7,27 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import com.github.dockerjava.api.model.Driver;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StandAloneTest {
 	public static void main(String args[]) {
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		
 		String url = "https://rahulshettyacademy.com/client/";
 		String username = "anshika@gmail.com";
 		String password = "Iamking@000";
 		String productName = "ZARA COAT 3";
+		String countryName = "india";
 		
 		driver.get(url);
 		driver.findElement(By.id("userEmail")).sendKeys(username);
@@ -46,6 +52,22 @@ public class StandAloneTest {
 		
 		driver.findElement(By.cssSelector(".totalRow button")).click();
 		
+		Actions a = new Actions(driver);
+		a.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")), countryName).build().perform();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+		List<WebElement> countries = driver.findElements(By.cssSelector(".ta-results button span"));
+		WebElement selectedCountry = countries.stream().filter(country->country.getText().equalsIgnoreCase(countryName)).findFirst().orElse(null);
+		a.moveToElement(selectedCountry).click().perform();
+		
+		
+		WebElement placeOrderBtn = driver.findElement(By.cssSelector(".action__submit"));
+		a.moveToElement(placeOrderBtn).click().perform();
+		
+		String confirmMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
+		String actualMessage = "THANKYOU FOR THE ORDER.";
+		Assert.assertEquals(confirmMessage, actualMessage);
+		driver.quit();
 		
 	}
 

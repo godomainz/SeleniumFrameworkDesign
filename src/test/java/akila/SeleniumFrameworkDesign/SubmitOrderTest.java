@@ -29,8 +29,7 @@ public class SubmitOrderTest {
 		landingPage.loginApplication(username, password);
 		
 		ProductCatalog productCatalogPage = new ProductCatalog(driver);
-		List<WebElement> products = productCatalogPage.getProducts();
-		
+		productCatalogPage.addProductToCart(productName);
 		
 		driver.quit();
 		

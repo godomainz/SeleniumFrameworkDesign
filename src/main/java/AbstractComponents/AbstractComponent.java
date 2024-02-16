@@ -33,6 +33,10 @@ public class AbstractComponent {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
 	}
 	
+	public void waitforElementToAppear(WebElement element) {
+		wait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
 	public void waitForElementToDissapear(WebElement element) throws InterruptedException {
 //		wait.until(ExpectedConditions.invisibilityOf(element));
 		Thread.sleep(2000);

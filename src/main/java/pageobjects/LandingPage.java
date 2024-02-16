@@ -20,6 +20,14 @@ public class LandingPage extends AbstractComponent {
 	@FindBy(id = "login")
 	WebElement login;
 	
+	@FindBy(css = "div[aria-label='Incorrect email or password.']")
+	WebElement errorMessage;
+	
+	public String getErrorMessage() {
+		waitforElementToAppear(errorMessage);
+		return errorMessage.getText();
+	}
+
 	public LandingPage(WebDriver driver) {
 		super(driver);
 		this.driver = driver;

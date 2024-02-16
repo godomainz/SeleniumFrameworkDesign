@@ -1,6 +1,5 @@
 package akila.TestComponents;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
@@ -8,13 +7,17 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pageobjects.LandingPage;
 
 public class BaseTest {
 	public WebDriver driver;
-	
+	public LandingPage landingPage;
 	public WebDriver initializeDriver() throws IOException {
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"//src//main//java//Resources//GlobalData.properties");
@@ -34,11 +37,19 @@ public class BaseTest {
 		return driver;
 	}
 	
+
+	@BeforeMethod
 	public LandingPage launchApplication() throws IOException {
-		WebDriver driver = initializeDriver();
-		LandingPage landingPage = new LandingPage(driver);
+		driver = initializeDriver();
+		landingPage = new LandingPage(driver);
 		landingPage.goTo();
 		return landingPage;
 		
+	}
+	
+	@AfterMethod
+	public void tearDown() {
+		driver.quit();
+
 	}
 }

@@ -10,11 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import pageobjects.LandingPage;
 
 public class BaseTest {
 	public WebDriver driver;
 	
-	public void initializeDriver() throws IOException {
+	public WebDriver initializeDriver() throws IOException {
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"//src//main//java//Resources//GlobalData.properties");
 		prop.load(fis);
@@ -30,5 +31,14 @@ public class BaseTest {
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		return driver;
+	}
+	
+	public LandingPage launchApplication() throws IOException {
+		WebDriver driver = initializeDriver();
+		LandingPage landingPage = new LandingPage(driver);
+		landingPage.goTo();
+		return landingPage;
+		
 	}
 }

@@ -39,10 +39,11 @@ public class LandingPage extends AbstractComponent {
 		this.userPassword = userPassword;
 	}
 	
-	public void loginApplication(String username, String password) {
+	public ProductCatalog loginApplication(String username, String password) {
 		this.userEmail.sendKeys(username);
 		this.userPassword.sendKeys(password);
 		this.login.click();
+		return new ProductCatalog(driver);
 	}
 	
 	public void goTo() {

@@ -1,11 +1,7 @@
 package akila.SeleniumFrameworkDesign;
 
 import java.time.Duration;
-import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
@@ -38,7 +34,7 @@ public class SubmitOrderTest {
 		Boolean match = cartPage.verifyProductDisplay(productName);
 		Assert.assertTrue(match);
 		CheckoutPage checkoutPage = cartPage.goToCheckout();
-		checkoutPage.selectCountry("india");
+		checkoutPage.selectCountry(countryName);
 		ConfirmationPage thankPage = checkoutPage.submit();
 		
 		String confirmMessage = thankPage.getConfirmMessage();
